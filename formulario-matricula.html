@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url('seu-background.jpg'); /* Substitua 'seu-background.jpg' pelo caminho da sua imagem de fundo */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #ffffff;
+        }
+
+        /* Overlay semi-transparente */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de transparência */
+            z-index: -1; /* Coloca o overlay atrás do conteúdo */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+    
+        nav {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: #0056b3;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .title-container {
+            grid-column: 1 / -1;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .cpf-container {
+            grid-column: 3;
+            justify-self: end;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            grid-column: 1 / -1;
+        }
+
+        form {
+            position: relative;
+            z-index: 1;
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 8px 16px; /* Tamanho reduzido */
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Cor alterada ao passar o mouse */
+        }
+
+        /* Estilização dos sub-containers */
+        .sub-container {
+            background-color: rgba(255, 255, 255, 0.1); /* Cor de fundo alternada */
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .sub-container:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05); /* Cor de fundo alternada */
+        }
+
+        /* Estilização das perguntas em três colunas */
+        .question-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .question-column {
+            flex: 0 0 calc(33.333% - 20px); /* 33.333% menos a margem */
+            margin-bottom: 20px;
+        }
+
+        /* Estilização dos rótulos */
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+
+        /* Media queries para tornar o layout responsivo */
+        @media screen and (max-width: 1024px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cpf-container {
+                grid-column: 2;
+                justify-self: center;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .cpf-container {
+                grid-column: 1;
+                justify-self: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Início</a>
+    <a href="formulario-matricula.html">Formulário de matrícula</a>
+    <a href="das-diretrizes-gerais-do-curso.html">Das diretrizes gerais do curso</a>
+    <a href="das-frequencias-e-avaliacoes.html">Das frequências e avaliações</a>
+    <a href="dos-direitos-de-uso-de-imagem.html">Dos direitos do uso de imagem</a>
+    <a href="contato.html">Contato</a>
+</nav>
+
+<div class="container">
+
+    <div class="title-container">
+        <h1>Formulário de Matrícula</h1>
+    </div>
+
+    <div class="cpf-container">
+        <h1>Verificação de CPF</h1>
+
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" required>
+
+        <!-- Campos de rematrícula -->
+        <div id="rematricula" style="display: none;">
+            <label for="rematricula">Rematrícula:</label>
+            <input type="text" id="rematricula" name="rematricula">
+        </div>
+
+        <!-- Campos de atualização de dados -->
+        <div id="atualizacao" style="display: none;">
+            <label for="atualizacao">Atualização de dados:</label>
+            <input type="text" id="atualizacao" name="atualizacao">
+        </div>
+    </div>
+
+    <p>Por favor, preencha o formulário abaixo para se matricular em nosso curso. Estamos ansiosos para tê-lo(a) conosco!</p>
+
+    <form action="caminho_para_processamento.php" method="post">
+
+        <div class="sub-container">
+            <h2>Perguntas</h2>
+            <div class="question-group">
+                <label class="question-column">
+                    <p class="highlight-title"><a href="das-diretrizes-gerais-do-curso.html">DAS DIRETRIZES GERAIS DO CURSO:</a></p>
+                    <div class="diretrizes">
+                        <p>VOCÊ CONCORDA?</p>
+                        <input type="radio" name="diretriz1" value="sim" required> Sim
+                        <input type="radio" name="diretriz1" value="nao"> Não
+                    </div>
+                </label>
+                <label class="question-column">
+                    <p class="highlight-title"><a href="das-frequencias-e-avaliacoes.html">DAS FREQUÊNCIAS E AVALIAÇÕES:</a></p>
+                    <div class="frequencias">
+                        <p>VOCÊ CONCORDA?</p>
+                        <input type="radio" name="diretriz2" value="sim" required> Sim
+                        <input type="radio" name="diretriz2" value="nao"> Não
+                    </div>
+                </label>
+                <label class="question-column">
+                    <p class="highlight-title"><a href="dos-direitos-de-uso-de-imagem.html">DOS DIREITOS DE USO DE IMAGEM:</a></p>
+                    <div class="frequencias">
+                        <p>VOCÊ CONCORDA?</p>
+                        <input type="radio" name="diretriz3" value="sim" required> Sim
+                        <input type="radio" name="diretriz3" value="nao"> Não
+                    </div>
+                </label>
+            </div>
+        </div>
+                    
+        <!-- Sub-container: Informações Pessoais -->
+        <div class="sub-container">
+            <h2>Informações Pessoais</h2>
+
+            <div class="input-group">
+                <label for="nome">Nome completo:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="dataNascimento">Data de nascimento:</label>
+                <input type="date" id="dataNascimento" name="dataNascimento" required>
+
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" name="cpf" maxlength="11" required>
+            </div>
+
+            <div class="input-group">
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="responsavel">Nome do responsável:</label>
+                <input type="text" id="responsavel" name="responsavel">
+            </div>
+        </div>
+
+        <!-- Sub-container: Endereço -->
+        <div class="sub-container">
+            <h2>Endereço</h2>
+
+            <div class="input-group">
+                <label for="cep">CEP:</label>
+                <input type="text" id="cep" name="cep" maxlength="8" required>
+
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" name="cidade" required>
+            </div>
+
+            <div class="input-group">
+                <label for="estado">Estado:</label>
+                <input type="text" id="estado" name="estado" required>
+
+                <label for="bairro">Bairro:</label>
+                <input type="text" id="bairro" name="bairro" required>
+
+                <label for="logradouro">Logradouro:</label>
+                <input type="text" id="logradouro" name="logradouro" required>
+
+                <label for="numero">Número:</label>
+                <input type="text" id="numero" name="numero" required>
+            </div>
+        </div>
+
+        <!-- Sub-container: Informações do Curso -->
+        <div class="sub-container">
+            <h2>Informações do Curso</h2>
+
+            <div class="input-group">
+                <label for="curso">Curso desejado:</label>
+                <select id="curso" name="curso" required>
+                    <option value="curso1">Curso 1</option>
+                    <option value="curso2">Curso 2</option>
+                    <option value="curso3">Curso 3</option>
+                </select>
+
+                <label for="periodo">Período desejado:</label>
+                <select id="periodo" name="periodo" required>
+                    <option value="manha">Manhã</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="noite">Noite</option>
+                </select>
+
+                <label for="motivo">Motivo da escolha do curso:</label>
+                <textarea id="motivo" name="motivo" rows="4" required></textarea>
+            </div>
+        </div>
+
+        <!-- Botão de Envio -->
+        <button type="submit">Enviar Matrícula</button>
+    </form>
+
+    <script>
+        document.getElementById('cpf').addEventListener('blur', function() {
+            var cpf = document.getElementById('cpf').value;
+            
+            fetch('verificar_cpf.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ cpf: cpf })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.cadastrado) {
+                    document.getElementById('rematricula').style.display = 'block';
+                    document.getElementById('atualizacao').style.display = 'block';
+                } else {
+                    document.getElementById('rematricula').style.display = 'none';
+                    document.getElementById('atualizacao').style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao verificar CPF:', error);
+                alert('Erro ao verificar CPF. Por favor, tente novamente.');
+            });
+        });
+
+        document.getElementById('cep').addEventListener('blur', function() {
+            var cep = document.getElementById('cep').value;
+            if (cep.length === 8) {
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('logradouro').value = data.logradouro;
+                    document.getElementById('bairro').value = data.bairro;
+                    document.getElementById('cidade').value = data.localidade;
+                    document.getElementById('estado').value = data.uf;
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar CEP:', error);
+                    alert('Erro ao buscar CEP. Por favor, verifique o CEP informado.');
+                });
+            } else {
+                alert('Por favor, informe um CEP válido com 8 dígitos.');
+            }
+        });
+    </script>
+
+</div>
+
+</body>
+</html>
